@@ -1,0 +1,21 @@
+#fretboard {
+  background-color: brown;
+  width: 80%;
+  margin: 1em auto;
+  padding: 0.1em 0;
+
+}
+
+.string {
+  height: 2em;
+  overflow: hidden;
+}
+
+.note {
+  background-color: yellow;
+  float: left;
+  width: 4em;
+  margin: 0.25em;
+  list-style-type: none;
+  text-align: center;
+}
