@@ -29,20 +29,24 @@ function NoteGenerator() {
   };
 }
 
+
+function createNoteLiElements(noteGen) {
 // construct the <li>'s for all the notes
-var noteGen = new NoteGenerator();
+  _.forEach(['E','A','D','G'], function(stringName) {
+      noteGen.setNote(stringName);
+      var note = noteGen.getCurrentNote();
 
-_.forEach(['E','A','D','G'], function(stringName) {
-    noteGen.setNote(stringName);
-    var note = noteGen.getCurrentNote();
+    _.times(14, function(n) {
+      $('<li/>', {
+        text: note.letter,
+        class: "note note-" + note.number + " neck-column-" + n
+      }).appendTo("#string_" + stringName);
 
-  _.times(14, function(n) {
-    $('<li/>', {
-      text: note.letter,
-      class: "note note-" + note.number + " neck-column-" + n
-    }).appendTo("#string_" + stringName);
-
-    noteGen.nextNote();
-    note = noteGen.getCurrentNote();
+      noteGen.nextNote();
+      note = noteGen.getCurrentNote();
+    });
   });
-});
+}
+
+var noteGen = new NoteGenerator();
+createNoteLiElements(noteGen);

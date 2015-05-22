@@ -1,8 +1,9 @@
 #fretboard {
-  background-color: brown;
+  background-color: #69270D;
   width: 80%;
   margin: 1em auto;
   padding: 0.1em 0;
+  color: white;
 
 }
 
@@ -12,10 +13,26 @@
 }
 
 .note {
-  background-color: yellow;
+  background-color: #501E0A;
   float: left;
-  width: 4em;
-  margin: 0.25em;
+  width: 3em;
+  margin: 0 0.75em;
   list-style-type: none;
   text-align: center;
+}
+
+.neck-column-0 {
+  background-color: #ECA600;
+}
+
+.neck-column-2 {
+  background-color: #BC0101;
+}
+
+.neck-column-4 {
+  background-color: #BC0101;
+}
+
+.neck-column-5 {
+  background-color: #BC0101;
 }
