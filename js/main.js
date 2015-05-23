@@ -1,52 +1,79 @@
-function NoteGenerator() {
-  this.noteNum = 0;
-  this.noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-  this.nextNote = function() {
-    //var currentNote = this.noteNum;
-    this.noteNum += 1;
-    if (this.noteNum > 11){
-        this.noteNum = 0;
-    }
-    //return this.getCurrentNote();
-  };
-  this.getCurrentNote = function() {
-    return {
-      letter:this.noteNames[this.noteNum],
-      number: this.noteNum
-    };
-  };
-  this.setNote = function(newNote) {
-    var origNoteGiven = newNote;
-    if (typeof(newNote) === "string" && newNote) {
-      newNote = _.indexOf(this.noteNames, newNote);
-    }
-
-    if (this.noteNames.length > newNote > -1) {
-      this.noteNum = newNote;
-    } else {
-      console.log("Warning: bad note passed to NoteGenerator.setNote(): " + origNoteGiven);
-    }
-  };
+function nextNoteNumber(noteNum) {
+  noteNum += 1;
+  noteNum = noteNum % 12;
+  return noteNum;
 }
 
+var sharpsByNum = {
+  0: 'C',
+  1: 'C#',
+  2: 'D',
+  3: 'D#',
+  4: 'E',
+  5: 'F',
+  6: 'F#',
+  7: 'G',
+  8: 'G#',
+  9: 'A',
+  10: 'A#',
+  11: 'B'
+};
 
-function createNoteLiElements(noteGen) {
+var flatsByNum = {
+  0: 'C',
+  1: 'Db',
+  2: 'D',
+  3: 'Eb',
+  4: 'E',
+  5: 'F',
+  6: 'Gb',
+  7: 'G',
+  8: 'Ab',
+  9: 'A',
+  10: 'Bb',
+  11: 'B'
+};
+
+var noteNumBySymbol = {
+  'C': 0,
+  'C#': 1,
+  'Db': 1,
+  'D': 2,
+  'D#': 3,
+  'Eb': 3,
+  'E': 4,
+  'F': 5,
+  'F#': 6,
+  'Gb': 6,
+  'G': 7,
+  'G#': 8,
+  'Ab': 8,
+  'A': 9,
+  'A#': 10,
+  'Bb': 10,
+  'B': 11
+};
+
+function createNoteLiElements(notesObj) {
 // construct the <li>'s for all the notes
   _.forEach(['E','A','D','G'], function(stringName) {
-      noteGen.setNote(stringName);
-      var note = noteGen.getCurrentNote();
+      var noteNum = noteNumBySymbol[stringName];
 
     _.times(14, function(n) {
       $('<li/>', {
-        text: note.letter,
-        class: "note note-" + note.number + " neck-column-" + n
+        text: notesObj[noteNum],
+        class: "note note-" + noteNum + " neck-column-" + n
       }).appendTo("#string_" + stringName);
 
-      noteGen.nextNote();
-      note = noteGen.getCurrentNote();
+      noteNum = nextNoteNumber(noteNum);
     });
   });
 }
 
-var noteGen = new NoteGenerator();
-createNoteLiElements(noteGen);
+createNoteLiElements(sharpsByNum);
+
+//TODO: Make function that generates scales given scale type and root.
+// After generating the scale (an array of note-numbers), it will just
+// 1) make all notes visible then 2) make color:transparent the
+// notes which aren't included in the scale.
+// see scrappaper notes for scale info.
