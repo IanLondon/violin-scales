@@ -124,5 +124,5 @@ _.forEach(_.keys(scaleFormulas), function(scaleName){
     $('<option/>').val(scaleName).text(scaleName));
 });
 
-//example: C maj
-showScale(buildScale(0,"major"));
+// initial scale (whatever the <select>s default to)
+showSelectedScale();
