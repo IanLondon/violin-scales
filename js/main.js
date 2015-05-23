@@ -124,9 +124,5 @@ _.forEach(_.keys(scaleFormulas), function(scaleName){
     $('<option/>').val(scaleName).text(scaleName));
 });
 
-
 //example: C maj
-// showScale(buildScale(0,"major"));
-
-//examp: G# natural minor
-showScale(buildScale(noteNumBySymbol["G#"],"natural minor"));
+showScale(buildScale(0,"major"));
