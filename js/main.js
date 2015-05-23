@@ -1,7 +1,27 @@
 function nextNoteNumber(noteNum) {
   noteNum += 1;
-  noteNum = noteNum % 12;
+  noteNum %= 12;
   return noteNum;
+}
+
+function buildScale(startingNote, scaleName) {
+  var scaleArray = [];
+  var scaleFormulas = {
+    "major": [0,2,4,5,7,9,11],
+    "natural minor": [0,2,3,5,7,8,10],
+    "harmonic minor": [0,2,3,5,7,8,11],
+    "melodic minor": [0,2,3,5,7,9,11]
+  };
+
+  if (scaleName in scaleFormulas) {
+    _.forEach(scaleFormulas[scaleName], function(n) {
+      scaleArray.push((startingNote + n) % 12);
+    });
+    return scaleArray;
+  } else {
+    console.log("Error: scale name '" + scaleName + "'not recognized.");
+  }
+
 }
 
 var sharpsByNum = {
@@ -72,8 +92,16 @@ function createNoteLiElements(notesObj) {
 
 createNoteLiElements(sharpsByNum);
 
-//TODO: Make function that generates scales given scale type and root.
-// After generating the scale (an array of note-numbers), it will just
-// 1) make all notes visible then 2) make color:transparent the
-// notes which aren't included in the scale.
-// see scrappaper notes for scale info.
+function showScale(scaleArray) {
+  var inactiveColor = "rgba(255,255,255,0.1)";
+  var activeColor = "rgba(255,255,255,1)";
+  // make all notes invisible, then make only the notes in the scale visible.
+  $(".note").css("color", inactiveColor);
+
+  _.forEach(scaleArray, function(noteNum) {
+    $(".note-" + noteNum).css("color", activeColor);
+  });
+}
+
+//example: C maj
+showScale(buildScale(0,"major"));
