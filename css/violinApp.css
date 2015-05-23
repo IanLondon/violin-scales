@@ -7,6 +7,10 @@
 
 }
 
+#selection-form {
+  margin-top: 1em;
+}
+
 .string {
   height: 2em;
   overflow: hidden;

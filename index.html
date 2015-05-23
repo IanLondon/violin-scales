@@ -25,12 +25,15 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title">h1.title</h1>
+                <h1 class="title">Violin Fingerboard Scales</h1>
                 <nav>
                     <ul>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
+                        <!-- <li><a href="#">About</a></li> -->
+                        <!-- <li><a href="#">Etc</a></li> -->
+                        <li><form id="selection-form">
+                          <select id="note-selector" onchange="showSelectedScale()"></select>
+                          <select id="scale-selector" onchange="showSelectedScale()"></select>
+                        </form></li>
                     </ul>
                 </nav>
             </header>
@@ -51,7 +54,7 @@
 
         <div class="footer-container">
             <footer class="wrapper">
-                <h3>footer</h3>
+                <h3>Ian London 2015. <a href = "https://github.com/hail-seitan/violin-scales">View the source on GitHub.</a></h3>
             </footer>
         </div>
 
